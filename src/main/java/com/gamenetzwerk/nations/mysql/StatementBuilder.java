@@ -14,6 +14,10 @@ public class StatementBuilder {
         this.preparedStatement = NationsPlugin.getPluginInstance().getMysqlManager().prepareStatement(query);
     }
 
+    public StatementBuilder(String query, int returnStatement) {
+        this.preparedStatement = NationsPlugin.getPluginInstance().getMysqlManager().prepareStatement(query, returnStatement);
+    }
+
     @SneakyThrows
     public StatementBuilder string(String value) {
         this.preparedStatement.setString(this.index++, value);

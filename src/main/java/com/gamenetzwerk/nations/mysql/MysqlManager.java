@@ -3,10 +3,7 @@ package com.gamenetzwerk.nations.mysql;
 import com.gamenetzwerk.nations.util.Config;
 import lombok.SneakyThrows;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class MysqlManager {
 
@@ -54,11 +51,26 @@ public class MysqlManager {
     }
 
     @SneakyThrows
+    public PreparedStatement prepareStatement(String query, int returnStatement) {
+        this.checkConnection();
+
+        return this.connection.prepareStatement(query, returnStatement);
+    }
+
+    @SneakyThrows
     public void queryUpdate(PreparedStatement preparedStatement) {
         this.checkConnection();
 
         preparedStatement.executeUpdate();
         preparedStatement.close();
+    }
+
+    @SneakyThrows
+    public ResultSet queryUpdateResult(PreparedStatement preparedStatement) {
+        this.checkConnection();
+
+        preparedStatement.executeUpdate();
+        return preparedStatement.getGeneratedKeys();
     }
 
     @SneakyThrows

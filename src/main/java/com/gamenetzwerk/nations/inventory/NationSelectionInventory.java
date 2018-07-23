@@ -8,19 +8,19 @@ import org.bukkit.inventory.Inventory;
 
 public class NationSelectionInventory {
 
-    public static final Inventory INVENTORY = Bukkit.createInventory(null, 3 * 9, "§0Wähle dein Volk!");
+    public static final Inventory inventory = Bukkit.createInventory(null, 3 * 9, "§0Wähle dein Volk!");
 
     static {
         int count = 9;
         for (Nation nation : Nation.values()) {
-            INVENTORY.setItem(count, new ItemBuilder(nation.getDisplayItem())
+            NationSelectionInventory.inventory.setItem(count, new ItemBuilder(nation.getDisplayItem())
                     .name(nation.getColor() + "§l" + nation.getName() + " §7Volk").build());
             count += 2;
         }
     }
 
     public static void openInventory(Player player) {
-        player.openInventory(INVENTORY);
+        player.openInventory(NationSelectionInventory.inventory);
     }
 
 }

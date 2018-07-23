@@ -19,7 +19,7 @@ public class InventoryClickListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getInventory().equals(NationSelectionInventory.INVENTORY)) {
+        if (event.getInventory().equals(NationSelectionInventory.inventory)) {
             event.setCancelled(true);
 
             ItemStack itemStack = event.getCurrentItem();

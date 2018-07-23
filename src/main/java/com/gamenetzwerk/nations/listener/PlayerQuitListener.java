@@ -17,6 +17,7 @@ public class PlayerQuitListener implements Listener {
 
         if (this.nationManager.containsNationPlayer(player)) {
             this.nationManager.saveNationPlayer(player);
+            this.nationManager.removePlayer(player);
         }
     }
 

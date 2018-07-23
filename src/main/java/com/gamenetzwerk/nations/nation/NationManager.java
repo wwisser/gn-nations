@@ -5,22 +5,24 @@ import com.gamenetzwerk.nations.constant.sql.Statement;
 import com.gamenetzwerk.nations.mysql.MysqlManager;
 import com.gamenetzwerk.nations.mysql.StatementBuilder;
 import com.gamenetzwerk.nations.nation.race.Race;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class NationManager {
 
-    private Map<Player, NationPlayer> cachedPlayers = new HashMap<>();
+    @Getter
     private Map<Integer, Race> races = new HashMap<>();
+    private Map<Player, NationPlayer> cachedPlayers = new HashMap<>();
     private MysqlManager mysqlManager = NationsPlugin.getPluginInstance().getMysqlManager();
 
     @SneakyThrows
     public void loadRaces() {
+        this.races.clear();
         ResultSet resultSet = this.mysqlManager.query(this.mysqlManager.prepareStatement(Statement.SELECT_RACES));
 
         while (resultSet.next()) {
@@ -33,6 +35,23 @@ public class NationManager {
                     resultSet.getString("effect"),
                     resultSet.getInt("amplifier")
             ));
+        }
+    }
+
+    @SneakyThrows
+    public void addRace(String name, int nationOrdinal, String effect, int amplifier) {
+        ResultSet resultSet = this.mysqlManager.queryUpdateResult(new StatementBuilder(Statement.INSERT_RACE,
+                java.sql.Statement.RETURN_GENERATED_KEYS)
+                .string(name)
+                .integer(nationOrdinal)
+                .string(effect)
+                .integer(amplifier)
+                .build());
+
+        if (resultSet.next()) {
+            int id = resultSet.getInt(1);
+
+            this.races.put(id, new Race(id, name, nationOrdinal, effect, amplifier));
         }
     }
 
@@ -52,12 +71,13 @@ public class NationManager {
 
         if (resultSet.next()) {
             registered = true;
-            Object race = resultSet.getObject("id");
+            Object race = resultSet.getObject("race");
 
             this.cachedPlayers.put(player, new NationPlayer(player, Nation.values()[resultSet.getInt("nation")],
                     race == null ? null : this.getRace((int) race)));
         }
 
+        resultSet.close();
         return registered;
     }
 
@@ -70,14 +90,12 @@ public class NationManager {
                 this.mysqlManager.queryUpdate(new StatementBuilder(Statement.INSERT_PLAYER_NATION)
                         .string(uuid)
                         .integer(nationPlayer.getNation().ordinal())
-                        .string(uuid)
                         .build());
             } else {
                 this.mysqlManager.queryUpdate(new StatementBuilder(Statement.INSERT_PLAYER)
                         .string(uuid)
                         .integer(nationPlayer.getNation().ordinal())
                         .integer(nationPlayer.getRace().getId())
-                        .string(uuid)
                         .build());
             }
         } else {
@@ -101,7 +119,7 @@ public class NationManager {
     }
 
     public boolean isRegistered(Player player) {
-        return this.containsNationPlayer(player) && this.loadNationPlayer(player);
+        return this.containsNationPlayer(player) || this.loadNationPlayer(player);
     }
 
     public boolean containsNationPlayer(Player player) {
