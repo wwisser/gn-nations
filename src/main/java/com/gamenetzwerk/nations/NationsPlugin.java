@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.annotation.plugin.Description;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
 import org.bukkit.plugin.java.annotation.plugin.author.Author;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 @Plugin(name = "Nations", version = "1.1-SNAPSHOT")
@@ -38,7 +39,9 @@ public class NationsPlugin extends JavaPlugin {
         }
 
         this.mysqlManager = new MysqlManager(config);
-        this.mysqlManager.queryUpdate(this.mysqlManager.prepareStatement(Statement.CREATE_TABLE));
+
+        Arrays.asList(Statement.CREATE_TABLE_PLAYERS, Statement.CREATE_TABLE_RACES)
+                .forEach(query -> this.mysqlManager.queryUpdate(this.mysqlManager.prepareStatement(query)));
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Set;
 public class RegistrationHelper {
 
     public void registerListeners(String pckg, JavaPlugin javaPlugin) {
-        RegistrationHelper.getPacketObjects("com.gamenetzwerk.nations.listener", Listener.class).forEach(listener ->
+        RegistrationHelper.getPacketObjects(pckg, Listener.class).forEach(listener ->
                 Bukkit.getServer().getPluginManager().registerEvents(
                         (Listener) listener, javaPlugin));
     }

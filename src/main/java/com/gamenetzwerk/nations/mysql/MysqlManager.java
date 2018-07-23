@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class MysqlManager {
 
@@ -24,7 +25,7 @@ public class MysqlManager {
     }
 
     @SneakyThrows
-    public void openConnection() {
+    private void openConnection() {
         Class.forName("com.mysql.jdbc.Driver");
         this.connection = DriverManager
                 .getConnection("jdbc:mysql://" + this.host + "/" + this.database + "?autoReconnect=true",
@@ -59,10 +60,10 @@ public class MysqlManager {
     }
 
     @SneakyThrows
-    public void query(PreparedStatement preparedStatement) {
+    public ResultSet query(PreparedStatement preparedStatement) {
         this.checkConnection();
 
-        preparedStatement.executeQuery();
+        return preparedStatement.executeQuery();
     }
 
 }
