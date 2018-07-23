@@ -2,9 +2,11 @@ package com.gamenetzwerk.nations;
 
 import com.gamenetzwerk.nations.constant.sql.Statement;
 import com.gamenetzwerk.nations.mysql.MysqlManager;
+import com.gamenetzwerk.nations.nation.NationManager;
 import com.gamenetzwerk.nations.util.Config;
 import com.gamenetzwerk.nations.util.RegistrationHelper;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.plugin.Description;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
@@ -23,6 +25,7 @@ public class NationsPlugin extends JavaPlugin {
     private static NationsPlugin pluginInstance;
 
     private MysqlManager mysqlManager;
+    private NationManager nationManager;
 
     @Override
     public void onLoad() {
@@ -47,12 +50,20 @@ public class NationsPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         NationsPlugin.pluginInstance = this;
+        this.nationManager = new NationManager();
 
+        this.nationManager.loadRaces();
         RegistrationHelper.registerListeners("com.gamenetzwerk.nations.listener", this);
+        Bukkit.getOnlinePlayers().forEach(player -> this.nationManager.loadNationPlayer(player));
     }
 
     @Override
     public void onDisable() {
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            if (this.nationManager.containsNationPlayer(player)) {
+                this.nationManager.saveNationPlayer(player);
+            }
+        });
         this.mysqlManager.closeConnection();
     }
 

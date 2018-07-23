@@ -34,7 +34,9 @@ public class MysqlManager {
 
     @SneakyThrows
     public void closeConnection() {
-        this.connection.close();
+        if (!this.connection.isClosed()) {
+            this.connection.close();
+        }
     }
 
     @SneakyThrows

@@ -1,8 +1,6 @@
 package com.gamenetzwerk.nations.nation;
 
-import com.gamenetzwerk.nations.nation.Nation;
 import com.gamenetzwerk.nations.nation.race.Race;
-import com.sun.istack.internal.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +14,7 @@ public class NationPlayer {
 
     private Player player;
     private Nation nation;
-    @Setter @Nullable private Race race;
+    @Setter private Race race;
 
     public String getName() {
         return this.player.getName();

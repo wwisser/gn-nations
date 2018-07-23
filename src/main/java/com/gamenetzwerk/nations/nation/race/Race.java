@@ -10,6 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 @Getter
 public class Race {
 
+    private int id;
     private String name;
     private int nationOrdinal;
     private String potionEffectName;
