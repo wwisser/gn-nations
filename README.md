@@ -1,8 +1,7 @@
 # Völker/Rassen Plugin für Game-Netzwerk.com
-***
 ## Commands
 - /nations reload | Lädt alle Rassen aus der Datenbank neu (nur bei externer Datenbankmanipulation nötig)
-- /nations addrace <name> <nation> <effekt> <level> | Fügt eine neue Rasse hinzu
+- /nations addrace [name] [nation] [effekt] [level] | Fügt eine neue Rasse hinzu
   Beispiel: /nations addrace Meerjungfrau Wasser SPEED 1
 
 ## Konstanten
