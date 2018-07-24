@@ -39,12 +39,15 @@ public class InventoryCloseListener implements Listener {
             NationPlayer nationPlayer = this.nationManager.getNationPlayer(player);
             if (!nationPlayer.hasRace()) {
                 List<Race> races = nationPlayer.getNation().getRaces();
-                Race race = races.get(ThreadLocalRandom.current().nextInt(races.size() - 1));
 
-                nationPlayer.setRace(race);
-                player.sendMessage("§7Du hast dir keine Rasse ausgesucht.");
-                player.sendMessage("§7Dir wurde eine zufällige Rasse zugewiesen: "
-                        + nationPlayer.getNation().getColor() + race.getName());
+                if (!races.isEmpty()) {
+                    Race race = races.get(ThreadLocalRandom.current().nextInt(races.size() - 1));
+
+                    nationPlayer.setRace(race);
+                    player.sendMessage("§7Du hast dir keine Rasse ausgesucht.");
+                    player.sendMessage("§7Dir wurde eine zufällige Rasse zugewiesen: "
+                            + nationPlayer.getNation().getColor() + race.getName());
+                }
             }
         }
     }
