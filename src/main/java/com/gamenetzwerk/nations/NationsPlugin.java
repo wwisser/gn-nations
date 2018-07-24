@@ -63,7 +63,7 @@ public class NationsPlugin extends JavaPlugin {
         RegistrationHelper.registerListeners("com.gamenetzwerk.nations.listener", this);
         super.getCommand("nations").setExecutor(new NationsCommand());
         Bukkit.getOnlinePlayers().forEach(player -> this.nationManager.loadNationPlayer(player));
-        new PotionRunnable().runTaskTimer(this, 0L, 45);
+        new PotionRunnable().runTaskTimer(this, 0L, 25);
     }
 
     @Override

@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 @Getter
 public class Race {
 
-    private static final int DURATION = 50;
+    private static final int DURATION = 500;
 
     private int id;
     private String name;
@@ -18,7 +18,7 @@ public class Race {
     private String potionEffectName;
     private int amplifier;
 
-    private Nation getNation() {
+    public Nation getNation() {
         return Nation.values()[this.nationOrdinal];
     }
 

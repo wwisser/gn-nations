@@ -21,7 +21,7 @@ public class RaceSelectionInventory {
 
         int count = 9;
         for (Race race : nation.getRaces()) {
-            inventory.setItem(count++, new ItemBuilder(Material.BOOK).name("§b" + race.getName()).build());
+            inventory.setItem(count++, new ItemBuilder(Material.BOOK).name(race.getNation().getColor() + race.getName()).build());
         }
 
         player.openInventory(inventory);
