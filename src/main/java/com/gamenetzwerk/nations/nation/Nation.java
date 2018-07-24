@@ -1,11 +1,14 @@
 package com.gamenetzwerk.nations.nation;
 
+import com.gamenetzwerk.nations.NationsPlugin;
+import com.gamenetzwerk.nations.nation.race.Race;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -21,6 +24,14 @@ public enum Nation {
     private String name;
     private ItemStack displayItem;
     private String color;
+
+    public List<Race> getRaces() {
+        return NationsPlugin.getPluginInstance().getNationManager().getRaces()
+                .values()
+                .stream()
+                .filter(race -> race.getNationOrdinal() == this.ordinal())
+                .collect(Collectors.toList());
+    }
 
     public static Nation fromMaterial(Material material) {
         return Arrays.stream(Nation.values()).filter(nation ->

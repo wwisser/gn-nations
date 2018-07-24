@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class NationManager {
 
@@ -53,6 +54,11 @@ public class NationManager {
 
             this.races.put(id, new Race(id, name, nationOrdinal, effect, amplifier));
         }
+    }
+
+    public Race getRace(String name) {
+        return this.races.values().stream().filter(race ->
+                race.getName().equalsIgnoreCase(name)).collect(Collectors.toList()).get(0);
     }
 
     public void addPlayer(Player player, NationPlayer nationPlayer) {

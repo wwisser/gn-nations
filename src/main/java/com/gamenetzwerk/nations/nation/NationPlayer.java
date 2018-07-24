@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -14,7 +15,11 @@ public class NationPlayer {
 
     private Player player;
     private Nation nation;
-    @Setter private Race race;
+    @Setter @Nullable private Race race;
+
+    public boolean hasRace() {
+        return this.race != null;
+    }
 
     public String getName() {
         return this.player.getName();

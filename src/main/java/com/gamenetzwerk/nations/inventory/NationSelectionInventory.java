@@ -20,7 +20,7 @@ public class NationSelectionInventory {
     }
 
     public static void openInventory(Player player) {
-        player.openInventory(NationSelectionInventory.inventory);
+        player.openInventory(inventory);
     }
 
 }
