@@ -36,6 +36,7 @@ public class InventoryClickListener implements Listener {
                 player.sendMessage("§7Du bist folgendem Volk beigetreten: " + nation.getColor() + nation.getName() + " Volk ");
                 player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
                 player.closeInventory();
+                player.teleport(nation.getSpawn());
 
                 new BukkitRunnable() {
                     @Override

@@ -4,6 +4,8 @@ import com.gamenetzwerk.nations.NationsPlugin;
 import com.gamenetzwerk.nations.nation.race.Race;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -31,6 +33,10 @@ public enum Nation {
                 .stream()
                 .filter(race -> race.getNationOrdinal() == this.ordinal())
                 .collect(Collectors.toList());
+    }
+
+    public Location getSpawn() {
+        return Bukkit.getWorld(this.getName().toLowerCase()).getSpawnLocation();
     }
 
     public static Nation fromMaterial(Material material) {

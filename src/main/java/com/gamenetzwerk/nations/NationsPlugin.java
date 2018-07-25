@@ -24,6 +24,7 @@ import java.util.LinkedHashMap;
 @Author(name = "Wende2k")
 @Description(desc = "Nations/Races Plugin Implementation for Game-Netzwerk.com")
 @Command(name = "nations", permission = "nations.admin")
+@Command(name = "spawn")
 @Permission(name = "nations.admin", desc = "Allows the usage of the Nations administration command", defaultValue = PermissionDefault.OP)
 @Getter
 public class NationsPlugin extends JavaPlugin {
