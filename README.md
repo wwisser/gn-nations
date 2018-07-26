@@ -6,8 +6,8 @@
 
 ## Konstanten
 ### Völker
-- Normales
-- Unterirdisches
+- Menschen
+- Untergrund
 - Wasser
 - Wald
 - Luft

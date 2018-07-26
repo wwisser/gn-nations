@@ -17,11 +17,13 @@ import java.util.stream.Collectors;
 @Getter
 public enum Nation {
 
-    NORMAL("Normales", new ItemStack(Material.APPLE), "§e"),
-    SUBTERRANEAN("Unterirdisches", new ItemStack(Material.BEDROCK), "§5"),
+    NORMAL("Menschen", new ItemStack(Material.APPLE), "§e"),
+    SUBTERRANEAN("Untergrund", new ItemStack(Material.BEDROCK), "§5"),
     WATER("Wasser", new ItemStack(Material.WATER_BUCKET), "§b"),
     FOREST("Wald", new ItemStack(Material.SAPLING), "§2"),
-    AIR("Luft", new ItemStack(Material.FEATHER), "§f");
+    AIR("Luft", new ItemStack(Material.FEATHER), "§f"),
+    ANIMAL("Tier", new ItemStack(Material.MONSTER_EGG), "§c"),
+    MONSTER("Monster", new ItemStack(Material.ROTTEN_FLESH), "§a");
 
     private String name;
     private ItemStack displayItem;

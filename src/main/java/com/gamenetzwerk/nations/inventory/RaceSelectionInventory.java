@@ -17,7 +17,7 @@ public class RaceSelectionInventory {
         Nation nation = NationsPlugin.getPluginInstance().getNationManager().getNationPlayer(player).getNation();
 
         inventory.setItem(4, new ItemBuilder(nation.getDisplayItem())
-                .name(nation.getColor() + "§l" + nation.getName() + " §7Volk").build());
+                .name(nation.getColor() + "§l" + nation.getName() + "volk").build());
 
         int count = 9;
         for (Race race : nation.getRaces()) {

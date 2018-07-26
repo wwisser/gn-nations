@@ -13,9 +13,8 @@ public class NationSelectionInventory {
     static {
         int count = 9;
         for (Nation nation : Nation.values()) {
-            NationSelectionInventory.inventory.setItem(count, new ItemBuilder(nation.getDisplayItem())
+            NationSelectionInventory.inventory.setItem(count++, new ItemBuilder(nation.getDisplayItem())
                     .name(nation.getColor() + "§l" + nation.getName() + " §7Volk").build());
-            count += 2;
         }
     }
 
