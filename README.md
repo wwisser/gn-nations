@@ -11,7 +11,7 @@
 - Wasser
 - Wald
 - Luft
-- Tiere
+- Tier
 - Monster
 
 ### Effekte
