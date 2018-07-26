@@ -11,6 +11,8 @@
 - Wasser
 - Wald
 - Luft
+- Tiere
+- Monster
 
 ### Effekte
 - SPEED
